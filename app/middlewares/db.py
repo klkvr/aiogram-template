@@ -11,6 +11,8 @@ class DbMiddleware(LifetimeControllerMiddleware):
     async def pre_process(self, obj, data, *args):
         if not hasattr(obj, "from_user"):
             data["user"] = None
+        elif obj.from_user == None:
+            data["user"] = None
         else:
             data["user"] = BotUser(obj.from_user.id)
 
